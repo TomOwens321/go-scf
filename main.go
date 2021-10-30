@@ -12,6 +12,7 @@ func main() {
 	// use FirstOrCreate to prevent record duplication
 	db.Where(&database.Genus{Name: "Greenus"}).FirstOrCreate(&p.Genus)
 	db.Where(&database.Species{Name: "plantus"}).FirstOrCreate(&p.Species)
+	db.Where(&database.Family{Name: "GreenFamily"}).FirstOrCreate(&p.Family)
 
 	db.Save(&p)
 

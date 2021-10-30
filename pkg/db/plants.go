@@ -10,10 +10,12 @@ type Plant struct {
 	CommonNames string
 	Genus       Genus
 	Species     Species
+	Family		Family
 	SubSpecies  string
 	Variety     string
 	GenusID     int
 	SpeciesID   int
+	FamilyID	int
 }
 
 func init() {

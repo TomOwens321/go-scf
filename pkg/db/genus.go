@@ -8,7 +8,7 @@ type Genus struct {
 	gorm.Model
 	Name        string `gorm:"unique"`
 	Description string
-	Plants		[]Plant
+	Plants      []Plant
 }
 
 func init() {

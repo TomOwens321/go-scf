@@ -6,16 +6,16 @@ import (
 
 type Plant struct {
 	gorm.Model
-	Name        string `gorm:"unique;index"`
-	CommonName  string
-	Genus       Genus
-	Species     Species
-	Family		Family
-	SubSpecies  string
-	Variety     string
-	GenusID     int
-	SpeciesID   int
-	FamilyID	int
+	Name       string `gorm:"unique;index"`
+	CommonName string
+	Genus      Genus
+	Species    Species
+	Family     Family
+	SubSpecies string
+	Variety    string
+	GenusID    int
+	SpeciesID  int
+	FamilyID   int
 }
 
 func init() {

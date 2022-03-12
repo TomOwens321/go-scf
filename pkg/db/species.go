@@ -4,9 +4,9 @@ import "gorm.io/gorm"
 
 type Species struct {
 	gorm.Model
-	Name        string	`gorm:"unique"`
+	Name        string `gorm:"unique"`
 	Description string
-	Plants		[]Plant
+	Plants      []Plant
 }
 
 func init() {

@@ -7,7 +7,7 @@ import (
 type Plant struct {
 	gorm.Model
 	Name        string `gorm:"unique;index"`
-	CommonNames string
+	CommonName  string
 	Genus       Genus
 	Species     Species
 	Family		Family

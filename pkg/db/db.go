@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-const dbPath = "db/scf.db"
+const dbPath = "scf.db"
 
 var db *gorm.DB
 

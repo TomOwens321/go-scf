@@ -8,7 +8,7 @@ import (
 func main() {
 	db := database.GetDB()
 
-	p := database.Plant{GenusName: "Greenus", SpeciesName: "plantus", SubSpecies: "sub_green", FamilyName: "Greens"}
+	p := database.Plant{GenusName: "Greenus", SpeciesName: "plantus"}
 	pName := p.FullName()
 
 	// use FirstOrCreate to prevent record duplication
@@ -20,4 +20,18 @@ func main() {
 	db.Save(&p)
 
 	fmt.Println("Saved plant:", p.Name)
+
+	g, err := database.GetGenus(p.Genus.ID)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(g.Name, g.Plants[0].Name)
+	}
+
+	s, err := database.GetSpecies(p.Species.ID)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(s.Name, s.Plants[0].Name)
+	}
 }

@@ -6,16 +6,26 @@ import (
 
 type Plant struct {
 	gorm.Model
-	Name       string `gorm:"unique;index"`
-	CommonName string
-	Genus      Genus
-	Species    Species
-	Family     Family
+	Name        string `gorm:"unique;index"`
+	CommonName  string
+	Genus       Genus
+	Species     Species
+	Family      Family
+	SubSpecies  string
+	Variety     string
+	GenusID     int
+	SpeciesID   int
+	FamilyID    int
+	GenusName   string `gorm:"-"`
+	SpeciesName string `gorm:"-"`
+	FamilyName  string `gorm:"-"`
+}
+
+type PlantName struct {
+	Genus      string
+	Species    string
 	SubSpecies string
 	Variety    string
-	GenusID    int
-	SpeciesID  int
-	FamilyID   int
 }
 
 func init() {
@@ -23,11 +33,13 @@ func init() {
 	db.AutoMigrate(&Plant{})
 }
 
-func (p *Plant) setFullName() string {
-	rslt := p.Genus.Name + " " + p.Species.Name
+func (p *Plant) FullName() string {
+	rslt := p.GenusName + " " + p.SpeciesName
+
 	if len(p.SubSpecies) > 0 {
 		rslt += " ssp: " + p.SubSpecies
 	}
+
 	if len(p.Variety) > 0 {
 		rslt += " var: " + p.Variety
 	}
@@ -36,7 +48,11 @@ func (p *Plant) setFullName() string {
 }
 
 func (p *Plant) BeforeSave(tx *gorm.DB) (err error) {
-	name := p.setFullName()
-	p.Name = name
+	p.Name = p.FullName()
+	db.Where(Genus{Name: p.GenusName}).FirstOrCreate(&p.Genus)
+	db.Where(Species{Name: p.SpeciesName}).FirstOrCreate(&p.Species)
+	if len(p.FamilyName) > 0 {
+		db.Where(Family{Name: p.FamilyName}).FirstOrCreate(&p.Family)
+	}
 	return
 }

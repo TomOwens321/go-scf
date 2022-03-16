@@ -7,14 +7,31 @@ import (
 
 func main() {
 	db := database.GetDB()
-	p := database.Plant{Variety: "Greeny-I", SubSpecies: "Platteville"}
+
+	p := database.Plant{GenusName: "Greenus", SpeciesName: "plantus"}
+	pName := p.FullName()
 
 	// use FirstOrCreate to prevent record duplication
-	db.Where(&database.Genus{Name: "Greenus"}).FirstOrCreate(&p.Genus)
-	db.Where(&database.Species{Name: "plantus"}).FirstOrCreate(&p.Species)
-	db.Where(&database.Family{Name: "GreenFamily"}).FirstOrCreate(&p.Family)
+	db.Where(&database.Plant{Name: pName}).FirstOrCreate(&p)
 
+	fmt.Println("Plant name: ", p.Name)
+
+	p.CommonName = "Green Plant"
 	db.Save(&p)
 
 	fmt.Println("Saved plant:", p.Name)
+
+	g, err := database.GetGenus(p.Genus.ID)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(g.Name, g.Plants[0].Name)
+	}
+
+	s, err := database.GetSpecies(p.Species.ID)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(s.Name, s.Plants[0].Name)
+	}
 }

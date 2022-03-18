@@ -7,7 +7,7 @@ import (
 
 type Family struct {
 	gorm.Model
-	Name        string `gorm:"unique"`
+	Name        string `gorm:"unique;index"`
 	Description string
 	Plants      []Plant
 }

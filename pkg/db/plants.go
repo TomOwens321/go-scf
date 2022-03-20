@@ -11,6 +11,7 @@ type Plant struct {
 	Genus       Genus
 	Species     Species
 	Family      Family
+	PlantDetail PlantDetail
 	SubSpecies  string
 	Variety     string
 	GenusID     int

@@ -1,3 +1,4 @@
+// based loosly on https://semaphoreci.com/community/tutorials/building-go-web-applications-and-microservices-using-gin
 package scfui
 
 import (

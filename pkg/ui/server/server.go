@@ -9,7 +9,7 @@ var router *gin.Engine
 
 func Serve() {
 	router = gin.Default()
-	router.LoadHTMLGlob("pkg/ui/templates/*")
+	router.LoadHTMLGlob("pkg/ui/templates/**/*")
 
 	initializeRoutes()
 

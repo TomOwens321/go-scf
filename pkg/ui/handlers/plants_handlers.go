@@ -13,7 +13,7 @@ func PlantsIndex(c *gin.Context) {
 		// Set the HTTP status to 200 (OK)
 		http.StatusOK,
 		// Use the index.html template
-		"plants.html",
+		"plants/index.html",
 		// Pass the data that the page uses
 		gin.H{
 			"title":  "Plant List",

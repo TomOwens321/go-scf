@@ -1,0 +1,18 @@
+{{ template "header.html" . }}
+<table width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Genus</th>
+    <th>Species</th>
+    <th>Common Name</th>
+  </tr>
+{{ range .plants }}
+  <tr>
+    <td>{{ .Name }}</td>
+    <td>{{ .Genus.Name }}</td>
+    <td>{{ .Species.Name }}</td>
+    <td>{{ .CommonName }}</td>
+  </tr>
+{{ end }}
+</table>
+{{ template "footer.html" . }}

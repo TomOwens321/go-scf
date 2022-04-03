@@ -2,6 +2,7 @@ package database
 
 import (
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Plant struct {
@@ -46,6 +47,12 @@ func (p *Plant) FullName() string {
 	}
 
 	return rslt
+}
+
+func AllPlants() []Plant {
+	var plants []Plant
+	db.Preload(clause.Associations).Find(&plants)
+	return plants
 }
 
 func (p *Plant) BeforeSave(tx *gorm.DB) (err error) {

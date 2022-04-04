@@ -55,6 +55,12 @@ func AllPlants() []Plant {
 	return plants
 }
 
+func GetPlantByID(id uint) Plant {
+	var plant Plant
+	db.Preload(clause.Associations).Find(&plant, id)
+	return plant
+}
+
 func (p *Plant) BeforeSave(tx *gorm.DB) (err error) {
 	p.Name = p.FullName()
 	db.Where(Genus{Name: p.GenusName}).FirstOrCreate(&p.Genus)

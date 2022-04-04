@@ -7,4 +7,5 @@ import (
 func initializeRoutes() {
 	router.GET("/", handlers.ShowIndexPage)
 	router.GET("/plants", handlers.PlantsIndex)
+	router.GET("/plants/:id", handlers.PlantShow)
 }

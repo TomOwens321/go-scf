@@ -2,6 +2,7 @@ package scfui
 
 import (
 	"net/http"
+	"strconv"
 	db "tomo/go-scf/pkg/db"
 
 	"github.com/gin-gonic/gin"
@@ -21,4 +22,17 @@ func PlantsIndex(c *gin.Context) {
 		},
 	)
 
+}
+
+func PlantShow(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	plant := db.GetPlantByID(uint(id))
+	c.HTML(
+		http.StatusOK,
+		"plants/show.html",
+		gin.H{
+			"title": plant.Name,
+			"plant": plant,
+		},
+	)
 }

@@ -9,8 +9,8 @@
   </tr>
 {{ range .plants }}
   <tr>
-    <td>{{ .Name }}</td>
-    <td>{{ .Genus.Name }}</td>
+    <td><a href="plants/{{ .ID }}">{{ .Name }}</a></td>
+    <td><a href="genus/{{ .Genus.ID }}">{{ .Genus.Name }}</a></td>
     <td>{{ .Species.Name }}</td>
     <td>{{ .CommonName }}</td>
   </tr>

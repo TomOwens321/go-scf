@@ -8,7 +8,7 @@ import (
 func main() {
 	db := database.GetDB()
 
-	p := database.Plant{GenusName: "Greenus", SpeciesName: "plantus"}
+	p := database.Plant{GenusName: "Greenus", SpeciesName: "plantus", FamilyName: "The Greens", Variety: "Platteville", SubSpecies: "greeny"}
 	pName := p.FullName()
 
 	// use FirstOrCreate to prevent record duplication

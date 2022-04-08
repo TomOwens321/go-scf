@@ -10,6 +10,12 @@
             <td>Common Name</td>
             <td>{{ .plant.CommonName }}</td>
         </tr>
+        {{ if .plant.FamilyID }}
+        <tr>
+            <td>Family</td>
+            <td>{{ .plant.Family.Name }}</td>
+        </tr>
+        {{ end }}
         <tr>
             <td>Genus</td>
             <td>{{ .plant.Genus.Name }}</td>

@@ -1,0 +1,13 @@
+{{ define "plants/form.html" }}
+{{ template "header.html" . }}
+<form method="POST" action="create">
+  <div>
+	<label for="familyname">Family:</label>
+	<input type="text" placeholder="Family" name="familyname" id="familyname">
+  </div>
+  <div>
+    <input type="SUBMIT">
+  </div>
+</form>
+{{ template "footer.html" . }}
+{{ end }}

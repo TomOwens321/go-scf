@@ -24,6 +24,14 @@ func PlantsIndex(c *gin.Context) {
 
 }
 
+func PlantNew(c *gin.Context) {
+	c.HTML(
+		http.StatusOK,
+		"plants/form.html",
+		gin.H{"title": "New Plant"},
+	)
+}
+
 func PlantShow(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	plant := db.GetPlantByID(uint(id))
@@ -32,6 +40,18 @@ func PlantShow(c *gin.Context) {
 		"plants/show.html",
 		gin.H{
 			"title": plant.Name,
+			"plant": plant,
+		},
+	)
+}
+
+func PlantCreate(c *gin.Context) {
+	plant := db.GetPlantByID(1)
+	c.HTML(
+		http.StatusOK,
+		"plants/show.html",
+		gin.H{
+			"title": "New Plant",
 			"plant": plant,
 		},
 	)

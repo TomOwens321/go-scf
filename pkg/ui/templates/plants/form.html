@@ -1,0 +1,25 @@
+{{ define "plants/form.html" }}
+{{ template "header.html" . }}
+<form method="POST" action="/plants/create">
+  <div>
+	  <label for="familyname">Family:</label>
+	  <input type="text" placeholder="Family" name="familyname" id="familyname" value="{{ .plant.Family.Name }}">
+  </div>
+  <div>
+    <label for="genus">Genus:</label>
+    <input type="text" placeholder="Genus" name="genus" id="genus" value="{{ .plant.Genus.Name }}">
+  </div>
+  <div>
+    <label for="species">Species:</label>
+    <input type="text" placeholder="species" name="species" id="species" value="{{ .plant.Species.Name }}">
+  </div>
+  <div>
+	  <label for="commonname">Common Name:</label>
+	  <input type="text" placeholder="Common Name" name="commonname" id="commonname" value="{{ .plant.CommonName }}">
+  </div>
+  <div>
+    <input type="SUBMIT">
+  </div>
+</form>
+{{ template "footer.html" . }}
+{{ end }}

@@ -1,0 +1,22 @@
+{{ define "plants/index.html" }}
+{{ template "header.html" . }}
+<table width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Family</th>
+    <th>Genus</th>
+    <th>Species</th>
+    <th>Common Name</th>
+  </tr>
+{{ range .plants }}
+  <tr>
+    <td><a href="plants/{{ .ID }}">{{ .Name }}</a></td>
+    <td><a href="families/{{ .Family.ID }}">{{ .Family.Name }}</a></td>
+    <td><a href="genus/{{ .Genus.ID }}">{{ .Genus.Name }}</a></td>
+    <td>{{ .Species.Name }}</td>
+    <td>{{ .CommonName }}</td>
+  </tr>
+{{ end }}
+</table>
+{{ template "footer.html" . }}
+{{ end }}

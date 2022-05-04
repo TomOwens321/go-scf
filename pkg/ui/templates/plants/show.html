@@ -1,0 +1,30 @@
+{{ define "plants/show.html" }}
+{{ template "header.html" . }}
+<div align="center">
+    <table width="60%">
+        <tr>
+            <td>Name</td>
+            <td>{{ .plant.Name }}</td>
+        </tr>
+        <tr>
+            <td>Common Name</td>
+            <td>{{ .plant.CommonName }}</td>
+        </tr>
+        {{ if .plant.FamilyID }}
+        <tr>
+            <td>Family</td>
+            <td>{{ .plant.Family.Name }}</td>
+        </tr>
+        {{ end }}
+        <tr>
+            <td>Genus</td>
+            <td>{{ .plant.Genus.Name }}</td>
+        </tr>
+        <tr>
+            <td>Species</td>
+            <td>{{ .plant.Species.Name }}</td>
+        </tr>
+    </table>
+</div>
+{{ template "footer.html" . }}
+{{ end }}

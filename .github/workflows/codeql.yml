@@ -1,7 +1,7 @@
 name: "Code Scanning - Action"
 
 on:
-  workflow-dispatch:
+  workflow_dispatch:
 #   push:
 #     branches: [add-gin]
   # pull_request:

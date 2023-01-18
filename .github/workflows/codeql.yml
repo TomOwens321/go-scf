@@ -1,11 +1,10 @@
 name: "Code Scanning - Action"
 
 on:
-  workflow_dispatch:
-#   push:
-#     branches: [add-gin]
-  # pull_request:
-  #   branches: [add-gin]
+  push:
+    branches: [add-gin]
+  pull_request:
+    branches: [add-gin]
   # schedule:
   #   #        ┌───────────── minute (0 - 59)
   #   #        │  ┌───────────── hour (0 - 23)
@@ -40,8 +39,8 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: go
-          config-file: ./go_config.yml
-              
+          config-file: ../go_config.yml
+
 
         # Override language selection by uncommenting this and choosing your languages
         # with:

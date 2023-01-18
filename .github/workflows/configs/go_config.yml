@@ -1,4 +1,4 @@
-query-filters:
-  - exclude:
-    id:
-      - go/cleartext-transmission
+- qlpack: codeql/go-queries
+- exclude:
+  id:
+    - go/cleartext-transmission

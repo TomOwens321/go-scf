@@ -39,7 +39,7 @@ jobs:
         uses: github/codeql-action/init@v2
         with:
           languages: go
-          config-file: ./configs/go_config.yml
+          config-file: ./.github/workflows/configs/go_config.yml
 
 
         # Override language selection by uncommenting this and choosing your languages

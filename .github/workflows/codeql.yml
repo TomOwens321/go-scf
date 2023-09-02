@@ -2,9 +2,7 @@ name: "Code Scanning - Action"
 
 on:
   push:
-    branches: [add-gin]
   pull_request:
-    branches: [add-gin]
   # schedule:
   #   #        ┌───────────── minute (0 - 59)
   #   #        │  ┌───────────── hour (0 - 23)
@@ -36,7 +34,7 @@ jobs:
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@main
         with:
           languages: go
           config-file: ./.github/workflows/configs/go_config.yml
@@ -49,7 +47,7 @@ jobs:
       # Autobuild attempts to build any compiled languages (C/C++, C#, Go, or Java).
       # If this step fails, then you should remove it and run the build manually (see below).
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@main
 
       # ℹ️ Command-line programs to run using the OS shell.
       # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
@@ -63,4 +61,4 @@ jobs:
       #     make release
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@main

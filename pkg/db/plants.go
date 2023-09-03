@@ -18,6 +18,7 @@ type Plant struct {
 	GenusID     int
 	SpeciesID   int
 	FamilyID    int
+	Locations   []Location `gorm:"many2many:plant_locations;"`
 	GenusName   string `gorm:"-"`
 	SpeciesName string `gorm:"-"`
 	FamilyName  string `gorm:"-"`

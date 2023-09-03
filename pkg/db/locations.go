@@ -9,7 +9,7 @@ type Location struct {
 	gorm.Model
 	Name        string `gorm:"unique;index"`
 	Description string
-	Plants      []Plant
+	Plants      []Plant `gorm:"many2many:plant_locations;"`
 	Lattitude   float64
 	Longitute   float64
 	Altitude    int

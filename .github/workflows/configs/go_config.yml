@@ -1,4 +1,0 @@
-- qlpack: codeql/go-queries
-- exclude:
-  id:
-    - go/cleartext-transmission

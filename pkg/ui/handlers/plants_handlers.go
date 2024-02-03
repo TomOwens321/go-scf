@@ -64,11 +64,14 @@ func PlantCreate(c *gin.Context) {
 		FamilyName:  c.PostForm("familyname"),
 		GenusName:   c.PostForm("genus"),
 		SpeciesName: c.PostForm("species"),
+		SubSpecies:  c.PostForm("subspecies"),
+		Variety:     c.PostForm("variety"),
 	}
 	pName := plant.FullName()
 	plant.Name = pName
 	db.GetDB().Where(&db.Plant{Name: pName}).Preload("PlantDetail").FirstOrCreate(&plant)
 	plant.CommonName = c.PostForm("commonname")
+	plant.PlantDetail.Description = c.PostForm("description")
 	db.GetDB().Save(&plant)
 	rPath := fmt.Sprint("/plants/", plant.ID)
 	c.Redirect(http.StatusFound, rPath)

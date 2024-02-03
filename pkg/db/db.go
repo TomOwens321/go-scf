@@ -14,7 +14,7 @@ func init() {
 }
 
 func connect() *gorm.DB {
-	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{FullSaveAssociations: true})
 	if err != nil {
 		panic("Failed to open the database")
 	}

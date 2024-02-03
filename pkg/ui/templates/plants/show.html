@@ -24,7 +24,44 @@
             <td>Species</td>
             <td>{{ .plant.Species.Name }}</td>
         </tr>
+        <tr>
+            <td>SubSpecies</td>
+            <td>{{ .plant.SubSpecies }}</td>
+        </tr>
+        <tr>
+            <td>Variety</td>
+            <td>{{ .plant.Variety }}</td>
+        </tr>
+        <tr>
+            <td>Flower Color</td>
+            <td>{{ .plant.PlantDetail.FlowerColor }}</td>
+        </tr>
+        <tr>
+            <td>Hardiness</td>
+            <td>{{ .plant.PlantDetail.Hardiness }}</td>
+        </tr>
+        <tr>
+            <td>Height</td>
+            <td align="left">{{ .plant.PlantDetail.Height }}</td>
+        </tr>
+        <tr>
+            <td>Spread</td>
+            <td align="left">{{ .plant.PlantDetail.Spread }}</td>
+        </tr>
+        <tr>
+            <td>Altitude</td>
+            <td align="left">{{ .plant.PlantDetail.Altitude }}</td>
+        </tr>
     </table>
 </div>
+<div align="center">
+    <table width="60%">
+        <tr>
+            <td>Description</td>
+            <td>{{ .plant.PlantDetail.Description }}</td>
+        </tr>
+    </table>
+</div>
+
 {{ template "footer.html" . }}
 {{ end }}

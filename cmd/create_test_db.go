@@ -8,11 +8,18 @@ import (
 func main() {
 
 	loc, _ := createTestLocation()
-	createTestPlant(&loc)
+	p, _ := createTestPlant(&loc)
 
+	fmt.Println("Plant name: ", p.Name)
+	fmt.Println("Plant common name: ", p.CommonName)
+	fmt.Println("Plant Family: ", p.FamilyName)
+	fmt.Println("Plant Genus: ", p.GenusName)
+	fmt.Println("Plant Species: ", p.SpeciesName)
+	fmt.Println("Plant description: ", p.PlantDetail.Description)
+	fmt.Println("Plant location 1: ", p.Locations[0].Name)
 }
 
-func createTestPlant(location *database.Location) {
+func createTestPlant(location *database.Location) (database.Plant, error) {
 	db := database.GetDB()
 
 	p := database.Plant{GenusName: "Greenus", SpeciesName: "plantus", FamilyName: "The Greens", Variety: "Platteville", SubSpecies: "greeny"}
@@ -21,14 +28,15 @@ func createTestPlant(location *database.Location) {
 	// use FirstOrCreate to prevent record duplication
 	db.Where(&database.Plant{Name: pName}).Preload("PlantDetail").FirstOrCreate(&p)
 
-	fmt.Println("Plant name: ", p.Name)
+	// fmt.Println("Plant name: ", p.Name)
 
 	p.CommonName = "Green Plant"
 	p.PlantDetail.Description = "This is a lovely green plant."
 	p.Locations = append(p.Locations, *location)
 	db.Save(&p)
 
-	fmt.Println("Saved plant:", p.Name)
+	// fmt.Println("Saved plant:", p.Name)
+	return p, nil
 }
 
 func createTestLocation() (database.Location, error) {
@@ -37,11 +45,11 @@ func createTestLocation() (database.Location, error) {
 	loc := database.Location{Name: "Test Location", Description: "This is a test location."}
 	db.Where(&database.Location{Name: loc.Name}).Preload("Plants").FirstOrCreate(&loc)
 
-	fmt.Println("Location name: ", loc.Name)
+	// fmt.Println("Location name: ", loc.Name)
 
 	loc.Description = "This is a test location."
 	db.Save(&loc)
 
-	fmt.Println("Saved location:", loc.Name)
+	// fmt.Println("Saved location:", loc.Name)
 	return loc, nil
 }

@@ -12,18 +12,13 @@ type Family struct {
 	Plants      []Plant
 }
 
-func init() {
-	db := GetDB()
-	db.AutoMigrate(&Family{})
-}
-
-func AllFamilies() ([]Family, error) {
+func AllFamilies(db *gorm.DB) ([]Family, error) {
 	var families []Family
 	err := db.Preload(clause.Associations).Find(&families)
 	return families, err.Error
 }
 
-func GetFamily(id uint) (Family, error) {
+func GetFamily(db *gorm.DB, id uint) (Family, error) {
 	var family Family
 	err := db.Preload(clause.Associations).First(&family, id)
 	return family, err.Error

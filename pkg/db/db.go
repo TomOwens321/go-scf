@@ -7,21 +7,25 @@ import (
 
 const dbPath = "scf.db"
 
-var db *gorm.DB
-
-func init() {
-	db = connect()
-}
-
 func connect() *gorm.DB {
 	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{FullSaveAssociations: true})
 	if err != nil {
 		panic("Failed to open the database")
+	}
+	// Migrate the schema
+	if err := db.AutoMigrate(
+		&Family{},
+		&Genus{},
+		&Species{},
+		&Location{},
+		&PlantDetail{},
+		&Plant{}); err != nil {
+		panic("Failed to migrate the database")
 	}
 
 	return db
 }
 
 func GetDB() *gorm.DB {
-	return db
+	return connect()
 }

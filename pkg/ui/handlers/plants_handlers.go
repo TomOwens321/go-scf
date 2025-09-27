@@ -10,7 +10,7 @@ import (
 )
 
 func PlantsIndex(c *gin.Context) {
-	plants := db.AllPlants()
+	plants := db.AllPlants(db.GetDB())
 	c.HTML(
 		// Set the HTTP status to 200 (OK)
 		http.StatusOK,
@@ -35,7 +35,7 @@ func PlantNew(c *gin.Context) {
 
 func PlantShow(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	plant := db.GetPlantByID(uint(id))
+	plant := db.GetPlantByID(db.GetDB(), uint(id))
 	c.HTML(
 		http.StatusOK,
 		"plants/show.html",
@@ -48,7 +48,7 @@ func PlantShow(c *gin.Context) {
 
 func PlantEdit(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
-	plant := db.GetPlantByID(uint(id))
+	plant := db.GetPlantByID(db.GetDB(), uint(id))
 	c.HTML(
 		http.StatusOK,
 		"plants/form.html",

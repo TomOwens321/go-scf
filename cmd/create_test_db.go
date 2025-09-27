@@ -32,6 +32,14 @@ func createTestPlant(location *database.Location) (database.Plant, error) {
 
 	p.CommonName = "Green Plant"
 	p.PlantDetail.Description = "This is a lovely green plant."
+	p.PlantDetail.FlowerColor = "Green"
+	p.PlantDetail.FlowerTime = "Spring"
+	p.PlantDetail.Hardiness = "Hardy"
+	p.PlantDetail.Height = 1.5 // meters
+	p.PlantDetail.Spread = 0.5 // meters
+	p.PlantDetail.Zone = 5
+	p.PlantDetail.Altitude = 1000 // meters
+	p.PlantDetail.Climate = "Temperate"
 	p.Locations = append(p.Locations, *location)
 	db.Save(&p)
 

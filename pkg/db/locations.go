@@ -18,24 +18,19 @@ type Location struct {
 	City        string
 }
 
-func init() {
-	db := GetDB()
-	db.AutoMigrate(&Location{})
-}
-
-func AllLocations() ([]Location, error) {
+func AllLocations(db *gorm.DB) ([]Location, error) {
 	var locations []Location
 	err := db.Preload(clause.Associations).Find(&locations)
 	return locations, err.Error
 }
 
-func GetLocation(id uint) (Location, error) {
+func GetLocation(db *gorm.DB, id uint) (Location, error) {
 	var location Location
 	err := db.Preload(clause.Associations).Find(&location, id)
 	return location, err.Error
 }
 
-func GetLocationByName(name string) (Location, error) {
+func GetLocationByName(db *gorm.DB, name string) (Location, error) {
 	var location Location
 	err := db.Preload(clause.Associations).Where("name = ?", name).First(&location)
 	return location, err.Error

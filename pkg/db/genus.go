@@ -12,18 +12,13 @@ type Genus struct {
 	Plants      []Plant
 }
 
-func init() {
-	db := GetDB()
-	db.AutoMigrate(&Genus{})
-}
-
-func AllGenus() ([]Genus, error) {
+func AllGenus(db *gorm.DB) ([]Genus, error) {
 	var genus []Genus
 	err := db.Preload(clause.Associations).Find(&genus)
 	return genus, err.Error
 }
 
-func GetGenus(id uint) (Genus, error) {
+func GetGenus(db *gorm.DB, id uint) (Genus, error) {
 	var genus Genus
 	err := db.Preload(clause.Associations).First(&genus, id)
 	return genus, err.Error

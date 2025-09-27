@@ -9,9 +9,9 @@ const dbPath = "scf.db"
 
 var db *gorm.DB
 
-func init() {
-	db = connect()
-}
+// func init() {
+// 	db = connect()
+// }
 
 func connect() *gorm.DB {
 	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{FullSaveAssociations: true})
@@ -27,5 +27,5 @@ func connect() *gorm.DB {
 }
 
 func GetDB() *gorm.DB {
-	return db
+	return connect()
 }

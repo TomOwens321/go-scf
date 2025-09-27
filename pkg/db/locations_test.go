@@ -3,14 +3,21 @@ package database_test
 import (
 	"testing"
 	database "tomo/go-scf/pkg/db"
+
+	"gorm.io/gorm"
 )
+
+func seedTestLocationsData(db *gorm.DB) {
+	location := database.Location{Name: "Garden", Description: "Home garden"}
+	db.Create(&location)
+}
 
 func Test_AllLocations(t *testing.T) {
 	db := SetupTestDB(t)
 	defer TeardownTestDB(t, db)
 
 	// Add test data
-	SeedTestData(db)
+	seedTestLocationsData(db)
 
 	locations, err := database.AllLocations(db)
 	if err != nil {
@@ -27,7 +34,7 @@ func Test_GetLocation(t *testing.T) {
 	defer TeardownTestDB(t, db)
 
 	// Add test data
-	SeedTestData(db)
+	seedTestLocationsData(db)
 
 	location, err := database.GetLocation(db, 1)
 	if err != nil {
@@ -44,14 +51,15 @@ func Test_GetLocationByName(t *testing.T) {
 	defer TeardownTestDB(t, db)
 
 	// Add test data
-	SeedTestData(db)
+	seedTestLocationsData(db)
 
-	location, err := database.GetLocationByName(db, "Test Location")
+	location, err := database.GetLocationByName(db, "Garden")
 	if err != nil {
 		t.Fatalf("Failed to retrieve location by name: %v", err)
 	}
 
-	if location.Name != "Test Location" {
-		t.Fatalf("Expected location name to be 'Test Location', got '%s'", location.Name)
+	if location.Name != "Garden" {
+		t.Fatalf("Expected location name to be 'Garden', got '%s'", location.Name)
 	}
 }
+

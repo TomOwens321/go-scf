@@ -36,40 +36,29 @@ func TeardownTestDB(t *testing.T, db *gorm.DB) {
 	}
 }
 
-func SeedTestData(db *gorm.DB) {
-	family := database.Family{Name: "Rosaceae", Description: "Rose family"}
-	db.Create(&family)
+// func SeedTestData(db *gorm.DB) {
 
-	genus := database.Genus{Name: "Rosa", Description: "Roses"}
-	db.Create(&genus)
+// 	plant_detail := database.PlantDetail{
+// 		Altitude:    100,
+// 		Climate:     "Temperate",
+// 		Description: "A test plant detail",
+// 		FlowerColor: "Red",
+// 		FlowerTime:  "Spring",
+// 		Hardiness:   "Hardy",
+// 		Height:      1.5,
+// 		Spread:      0.5,
+// 		Zone:        5,
+// 	}
+// 	db.Create(&plant_detail)
 
-	species := database.Species{Name: "rubiginosa", Description: "Sweet briar rose"}
-	db.Create(&species)
-
-	location := database.Location{Name: "Test Location", Description: "A location for testing"}
-	db.Create(&location)
-
-	plant_detail := database.PlantDetail{
-		Altitude:    100,
-		Climate:     "Temperate",
-		Description: "A test plant detail",
-		FlowerColor: "Red",
-		FlowerTime:  "Spring",
-		Hardiness:   "Hardy",
-		Height:      1.5,
-		Spread:      0.5,
-		Zone:        5,
-	}
-	db.Create(&plant_detail)
-
-	plant := database.Plant{
-		CommonName:  "Test Rose",
-		GenusName:   genus.Name,
-		FamilyName: family.Name,
-		Locations:   []database.Location{location},
-	}
-	db.Create(&plant)
-}
+// 	plant := database.Plant{
+// 		CommonName:  "Test Rose",
+// 		GenusName:   "Rosa",
+// 		FamilyName: "Rosaceae",
+// 		Locations:   []database.Location{location},
+// 	}
+// 	db.Create(&plant)
+// }
 
 func Test_GetDB(t *testing.T) {
 	db := SetupTestDB(t)

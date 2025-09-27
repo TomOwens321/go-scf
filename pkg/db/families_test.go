@@ -3,14 +3,21 @@ package database_test
 import (
 	"testing"
 	database "tomo/go-scf/pkg/db"
+
+	"gorm.io/gorm"
 )
+
+func seedTestFamiliesData(db *gorm.DB) {
+	family := database.Family{Name: "Rosaceae", Description: "Rose family"}
+	db.Create(&family)
+}
 
 func Test_AllFamilies(t *testing.T) {
 	db := SetupTestDB(t)
 	defer TeardownTestDB(t, db)
 
 	// Add test data
-	SeedTestData(db)
+	seedTestFamiliesData(db)
 
 	families, err := database.AllFamilies(db)
 	if err != nil {
@@ -27,7 +34,7 @@ func Test_GetFamily(t *testing.T) {
 	defer TeardownTestDB(t, db)
 
 	// Add test data
-	SeedTestData(db)
+	seedTestFamiliesData(db)
 
 	family, err := database.GetFamily(db, 1)
 	if err != nil {

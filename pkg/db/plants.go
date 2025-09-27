@@ -31,11 +31,6 @@ type PlantName struct {
 	Variety    string
 }
 
-func init() {
-	db := GetDB()
-	db.AutoMigrate(&Plant{})
-}
-
 func (p *Plant) FullName() string {
 	rslt := p.GenusName + " " + p.SpeciesName
 
@@ -50,13 +45,13 @@ func (p *Plant) FullName() string {
 	return rslt
 }
 
-func AllPlants() []Plant {
+func AllPlants(db *gorm.DB) []Plant {
 	var plants []Plant
 	db.Preload(clause.Associations).Find(&plants)
 	return plants
 }
 
-func GetPlantByID(id uint) Plant {
+func GetPlantByID(db *gorm.DB, id uint) Plant {
 	var plant Plant
 	db.Preload(clause.Associations).Find(&plant, id)
 	return plant
@@ -64,10 +59,10 @@ func GetPlantByID(id uint) Plant {
 
 func (p *Plant) BeforeSave(tx *gorm.DB) (err error) {
 	p.Name = p.FullName()
-	db.Where(Genus{Name: p.GenusName}).FirstOrCreate(&p.Genus)
-	db.Where(Species{Name: p.SpeciesName}).FirstOrCreate(&p.Species)
+	tx.Where(Genus{Name: p.GenusName}).FirstOrCreate(&p.Genus)
+	tx.Where(Species{Name: p.SpeciesName}).FirstOrCreate(&p.Species)
 	if len(p.FamilyName) > 0 {
-		db.Where(Family{Name: p.FamilyName}).FirstOrCreate(&p.Family)
+		tx.Where(Family{Name: p.FamilyName}).FirstOrCreate(&p.Family)
 	}
 	return
 }

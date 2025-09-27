@@ -13,7 +13,13 @@ func connect() *gorm.DB {
 		panic("Failed to open the database")
 	}
 	// Migrate the schema
-	if err := db.AutoMigrate(&Family{}, &Plant{}); err != nil {
+	if err := db.AutoMigrate(
+		&Family{},
+		&Genus{},
+		&Species{},
+		&Location{},
+		&PlantDetail{},
+		&Plant{}); err != nil {
 		panic("Failed to migrate the database")
 	}
 

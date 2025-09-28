@@ -45,3 +45,35 @@ func Test_GetGenus(t *testing.T) {
 		t.Fatal("Expected a valid genus")
 	}
 }
+
+func Test_GetGenus_NotFound(t *testing.T) {
+	db := SetupTestDB(t)
+	defer TeardownTestDB(t, db)
+
+	_, err := database.GetGenus(db, 999) // Assuming 999 does not exist
+	if err == nil {
+		t.Fatal("Expected error for non-existent genus")
+	}
+}
+
+func Test_GetGenusPlants(t *testing.T) {
+	db := SetupTestDB(t)
+	defer TeardownTestDB(t, db)
+
+	// Add test data
+	seedTestGenusData(db)
+	plants := []database.Plant{
+		{GenusName: "Rosa", SpeciesName: "rose"},
+		{GenusName: "Rosa", SpeciesName: "wildrose"},
+	}
+	db.Create(&plants)
+
+	genus, err := database.GetGenus(db, 1)
+	if err != nil {
+		t.Fatalf("Failed to retrieve genus: %v", err)
+	}
+
+	if len(genus.Plants) != len(plants) {
+		t.Fatalf("Expected %v plants in genus, got %v", len(plants), len(genus.Plants))
+	}
+}

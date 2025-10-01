@@ -56,6 +56,23 @@ func Test_GetGenus_NotFound(t *testing.T) {
 	}
 }
 
+func Test_GetGenusByName(t *testing.T) {
+	db := SetupTestDB(t)
+	defer TeardownTestDB(t, db)
+
+	// Add test data
+	seedTestGenusData(db)
+
+	genus, err := database.GetGenusByName(db, "Rosa")
+	if err != nil {
+		t.Fatalf("Failed to retrieve genus by name: %v", err)
+	}
+
+	if genus.ID == 0 {
+		t.Fatal("Expected a valid genus")
+	}
+}
+
 func Test_GetGenusPlants(t *testing.T) {
 	db := SetupTestDB(t)
 	defer TeardownTestDB(t, db)

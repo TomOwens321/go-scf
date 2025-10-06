@@ -10,9 +10,10 @@ type Location struct {
 	Name        string `gorm:"unique;index"`
 	Description string
 	Plants      []Plant `gorm:"many2many:plant_locations;"`
-	Lattitude   float64
-	Longitute   float64
+	Latitude    float64
+	Longitude   float64
 	Altitude    int
+	Area        string
 	State       string
 	County      string
 	City        string

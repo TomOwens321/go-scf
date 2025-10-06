@@ -7,21 +7,22 @@ import (
 
 type Plant struct {
 	gorm.Model
-	Name        string `gorm:"unique;index"`
-	CommonName  string
-	Genus       Genus
-	Species     Species
-	Family      Family
-	PlantDetail PlantDetail
-	SubSpecies  string
-	Variety     string
-	GenusID     int
-	SpeciesID   int
-	FamilyID    int
-	Locations   []Location `gorm:"many2many:plant_locations;"`
-	GenusName   string `gorm:"-"`
-	SpeciesName string `gorm:"-"`
-	FamilyName  string `gorm:"-"`
+	Name            string `gorm:"unique;index"`
+	CommonName      string
+	Genus           Genus
+	Species         Species
+	Family          Family
+	PlantDetail     PlantDetail
+	SubSpecies      string
+	Variety         string
+	GerminationCode string
+	GenusID         int
+	SpeciesID       int
+	FamilyID        int
+	Locations       []Location `gorm:"many2many:plant_locations;"`
+	GenusName       string     `gorm:"-"`
+	SpeciesName     string     `gorm:"-"`
+	FamilyName      string     `gorm:"-"`
 }
 
 type PlantName struct {

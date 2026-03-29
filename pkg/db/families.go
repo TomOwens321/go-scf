@@ -8,6 +8,7 @@ import (
 type Family struct {
 	gorm.Model
 	Name        string `gorm:"unique;index"`
+	CommonName  string
 	Description string
 	Plants      []Plant
 }

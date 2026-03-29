@@ -7,21 +7,22 @@ import (
 
 type Plant struct {
 	gorm.Model
-	Name        string `gorm:"unique;index"`
-	CommonName  string
-	Genus       Genus
-	Species     Species
-	Family      Family
-	PlantDetail PlantDetail
-	SubSpecies  string
-	Variety     string
-	GenusID     int
-	SpeciesID   int
-	FamilyID    int
-	Locations   []Location `gorm:"many2many:plant_locations;"`
-	GenusName   string `gorm:"-"`
-	SpeciesName string `gorm:"-"`
-	FamilyName  string `gorm:"-"`
+	Name            string `gorm:"unique;index"`
+	CommonName      string
+	Genus           Genus
+	Species         Species
+	Family          Family
+	PlantDetail     PlantDetail
+	SubSpecies      string
+	Variety         string
+	GerminationCode string
+	GenusID         int
+	SpeciesID       int
+	FamilyID        int
+	Locations       []Location `gorm:"many2many:plant_locations;"`
+	GenusName       string     `gorm:"-"`
+	SpeciesName     string     `gorm:"-"`
+	FamilyName      string     `gorm:"-"`
 }
 
 type PlantName struct {
@@ -55,6 +56,12 @@ func GetPlantByID(db *gorm.DB, id uint) Plant {
 	var plant Plant
 	db.Preload(clause.Associations).Find(&plant, id)
 	return plant
+}
+
+func GetPlantByName(db *gorm.DB, name string) (Plant, error) {
+	var plant Plant
+	err := db.Preload(clause.Associations).Where("name = ?", name).First(&plant)
+	return plant, err.Error
 }
 
 func (p *Plant) BeforeSave(tx *gorm.DB) (err error) {

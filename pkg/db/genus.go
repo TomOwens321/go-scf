@@ -23,3 +23,9 @@ func GetGenus(db *gorm.DB, id uint) (Genus, error) {
 	err := db.Preload(clause.Associations).First(&genus, id)
 	return genus, err.Error
 }
+
+func GetGenusByName(db *gorm.DB, name string) (Genus, error) {
+	var genus Genus
+	err := db.Preload(clause.Associations).Where("name = ?", name).First(&genus)
+	return genus, err.Error
+}

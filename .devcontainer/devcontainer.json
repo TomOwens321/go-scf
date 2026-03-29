@@ -3,10 +3,15 @@
 {
 	"name": "Go",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/go:1-1.21-bookworm"
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.24-bookworm",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
+	"features": {
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+        "packages": "sqlite3"
+    }
+}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

@@ -18,7 +18,3 @@ type PlantDetail struct {
 	Zone        uint
 }
 
-// func init() {
-// 	db := GetDB()
-// 	db.AutoMigrate(&PlantDetail{})
-// }

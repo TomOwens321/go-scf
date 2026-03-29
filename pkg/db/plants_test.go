@@ -54,3 +54,67 @@ func Test_GetPlantByID(t *testing.T) {
 	}
 }
 
+func Test_GetPlantByName(t *testing.T) {
+	db := SetupTestDB(t)
+	defer TeardownTestDB(t, db)
+
+	// Add test data
+	seedTestPlantsData(db)
+
+	plant, err := database.GetPlantByName(db, "genus1 species1")
+	if err != nil {
+		t.Fatalf("Failed to retrieve plant by name: %v", err)
+	}
+
+	if plant.ID == 0 {
+		t.Fatal("Expected a valid plant")
+	}
+}
+
+func Test_PlantNames(t *testing.T) {
+	db := SetupTestDB(t)
+	defer TeardownTestDB(t, db)
+
+	expect := []string{
+		"Greenus plantus",
+		"Greenus plantus ssp: subplantus",
+		"Greenus plantus var: varietus",
+		"Greenus plantus ssp: subplantus var: varietus",
+	}
+
+	// Add test data
+	plants := []database.Plant{
+		{
+			GenusName:   "Greenus",
+			SpeciesName: "plantus",
+		},
+		{
+			GenusName:   "Greenus",
+			SpeciesName: "plantus",
+			SubSpecies:  "subplantus",
+		},
+		{
+			GenusName:   "Greenus",
+			SpeciesName: "plantus",
+			Variety:     "varietus",
+		},
+		{
+			GenusName:   "Greenus",
+			SpeciesName: "plantus",
+			SubSpecies:  "subplantus",
+			Variety:     "varietus",
+		},
+	}
+	db.Create(&plants)
+
+	got := database.AllPlants(db)
+	if len(got) != 4 {
+		t.Fatal("Expected 4 plants")
+	}
+	for i, plant := range got {
+		if plant.Name != expect[i] {
+			t.Fatalf("Expected full name to be '%s', got '%s'", expect[i], plant.Name)
+		}
+	}
+}
+
